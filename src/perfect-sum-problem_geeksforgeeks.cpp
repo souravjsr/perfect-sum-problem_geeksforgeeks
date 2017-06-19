@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : perfect-sum-problem_geeksforgeeks.cpp
 // Author      : Sourav Mukherjee
-// Version     : 0.1
+// Version     : 0.2
 // Copyright   : Your copyright notice
 // Description : "http://practice.geeksforgeeks.org/problems/perfect-sum-problem/0" in C++, Ansi-style
 //============================================================================
