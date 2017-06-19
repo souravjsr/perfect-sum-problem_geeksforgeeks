@@ -10,8 +10,19 @@
 using namespace std;
 
 int main() {
-        int T = 0,n = 0, sum = 0;
+        long T = 0,n = 0, sum = 0, i = 0, j = 0;
+        long *a = (long*) malloc(n*sizeof(long));
+        long *b = (long*) malloc(n*sizeof(long));
 	cin >> T >> n >> sum;
-	cout  << T;
+	for(i =0;i <= T; i++){
+	    for(j =0 ;j < n ;j++){
+	        cout << "Enter "<< j ;
+	        cin >> a[j];
+	    }
+	    for(j =0 ;j < n ;j++){
+                cout << a[j];
+            }
+	}
+
 	return 0;
 }
