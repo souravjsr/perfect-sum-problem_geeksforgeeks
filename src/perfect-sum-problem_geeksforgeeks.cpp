@@ -4,69 +4,103 @@
 // Version     : 0.1
 // Copyright   : Your copyright notice
 // Description : "http://practice.geeksforgeeks.org/problems/perfect-sum-problem/0"
-//                        in C++, Ansi-style
+//                        in C++, Ansi-style.
 // Reference   : "https://www.youtube.com/watch?v=zKwwjAkaXLI"
 //                        Logic of Dynamic program need to be implemented.
 // In-progress.
 //============================================================================
 
 #include <iostream>
-#include <vector>
+#include <string>
 using namespace std;
 
-int findCount(int T, int sum, long *a)
+int num_of_user_input = 0, sum = 0, row = 0, col = 0;
+int* arr_user_input = new int[row];
+int** multDimension_arr = new int*[row];
+
+void
+get_user_input()
 {
-  int counter = 0;
-  for (int it = 0; it < T; it++)
+  cout << "--------------------------" << endl;
+  for (int i = 0; i < num_of_user_input; i++)
     {
-
-      long localSum = 0;
-      for (int jt = it; jt < T; jt++)
-        {
-          localSum = localSum + a[jt];
-          if (localSum == sum)
-            {
-              counter++;
-              break;
-            }
-        }
-
+      cout << "The " << i << " value: \t";
+      cout << arr_user_input[i] << endl;
     }
-  return(counter);
 }
 
-int main(){
-    long T = 0, sum = 0,it = 0;
-    //long *b = (long*) malloc(T*sizeof(long));
-    long* a = (long*) malloc(T*sizeof(long));
-    cout << "Enter the array length--> ";
-    cin >> T;
-    cout << "Enter the sum to be checked--> ";
-    cin >> sum;
-    for (it = 0; it < T; it++)
-      {
-        long val;
-        cout << "  Enter the value "<< it <<" in the array \n      ";
-        cin >> val;
-        a[it] = val;
-        //cout << a[it] << "\n" ;
-      }
-    int ret = findCount(T,sum, a);
-    cout << "Count of all the subset--> "<< ret << endl;
-    cout << "\n Ending the program \n";
-    return 0;
-  }
+void
+set_user_input()
+{
+  cout << "--------------------------" << endl;
+  for (int i = 0; i < num_of_user_input; i++)
+    {
+      cin >> arr_user_input[i];
+    }
+}
 
-/*
- cin >> n >> sum;
- for(i =0;i <= T; i++){
- for(j =0 ;j < n ;j++){
- cout << "Enter "<< j ;
- cin >> a[j];
- }
- for(j =0 ;j < n ;j++){
- b[j] = sum - a[j];
- cout << b[j] << "**";
- }
- cout  << endl;
- }*/
+void
+get_multi_dimension_array()
+{
+  cout << "--------------------------" << endl;
+  for (int r = 0; r < row; r++)
+    {
+      for (int c = 0; c < col + 1; c++)
+        {
+          cout << multDimension_arr[r][c] << "\t";
+        }
+      cout << endl;
+    }
+}
+
+void
+set_multi_dimension_array()
+{
+  cout << "--------------------------" << endl;
+  for (int r = 0; r < row; r++)
+    {
+      multDimension_arr[r] = new int[col + 1];
+    }
+  for (int r = 0; r < row; r++)
+    {
+      for (int c = 0; c < col + 1; c++)
+        {
+          if ((r == 0) && (c > 0))
+            {
+              multDimension_arr[r][c] = c - 1;
+            }
+          else if ((r > 0) && (c == 0))
+            {
+              cout << r << "==" << arr_user_input[4] << endl;
+              multDimension_arr[r][c] = arr_user_input[r-1];
+              //cin >> multDimension_arr[r][c] ;
+            }
+          else
+            {
+              multDimension_arr[r][c] = 888;
+            }
+          multDimension_arr[0][0] = 999;
+        }
+    }
+}
+
+int
+main(int argc, char* argv[])
+{
+  cout << " Enter the number of element --> \t";
+  cin >> num_of_user_input;
+  cout << " Enter the sum --> \t";
+  cin >> sum;
+  col = sum + 1; //8
+  row = num_of_user_input + 1;
+  set_user_input();
+  get_user_input(); //This is for my debug purpose.
+  set_multi_dimension_array();
+  get_multi_dimension_array();
+  for (int r = 0; r < num_of_user_input; r++)
+    {
+     delete[] multDimension_arr[r];
+    }
+  delete[] multDimension_arr;
+  delete[] arr_user_input;
+}
