@@ -14,9 +14,9 @@
 #include <string>
 using namespace std;
 
-int num_of_user_input = 0, sum = 0, row = 0, col = 0;
-int* arr_user_input = new int[row];
-int** multDimension_arr = new int*[row];
+int num_of_user_input, sum, row, col;
+int* arr_user_input ;
+int** multDimension_arr ;
 
 void
 get_user_input()
@@ -71,13 +71,14 @@ set_multi_dimension_array()
             }
           else if ((r > 0) && (c == 0))
             {
-              cout << r << "==" << arr_user_input[4] << endl;
               multDimension_arr[r][c] = arr_user_input[r-1];
-              //cin >> multDimension_arr[r][c] ;
             }
+          else if((c == 1) && (r != 0)){
+              multDimension_arr[r][c] = 1;
+          }
           else
             {
-              multDimension_arr[r][c] = 888;
+              multDimension_arr[r][c] = 0;
             }
           multDimension_arr[0][0] = 999;
         }
@@ -87,16 +88,23 @@ set_multi_dimension_array()
 int
 main(int argc, char* argv[])
 {
+  num_of_user_input = 0;
+  sum = 0;
+  row = 0;
+  col = 0;
   cout << " Enter the number of element --> \t";
   cin >> num_of_user_input;
   cout << " Enter the sum --> \t";
   cin >> sum;
-  col = sum + 1; //8
+  col = sum + 1;
   row = num_of_user_input + 1;
+  arr_user_input = new int[row];
+  multDimension_arr = new int*[row];
   set_user_input();
-  get_user_input(); //This is for my debug purpose.
+  //get_user_input(); //This is for my debug purpose.
   set_multi_dimension_array();
   get_multi_dimension_array();
+  cout << "arr_user_input size --> "<< sizeof(arr_user_input)<<endl;
   for (int r = 0; r < num_of_user_input; r++)
     {
      delete[] multDimension_arr[r];
